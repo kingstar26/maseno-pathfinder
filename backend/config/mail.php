@@ -16,6 +16,14 @@ function load_mugts_mail_environment(): void
     }
 
     $allowedKeys = [
+        // Database
+        'DB_HOST',
+        'DB_PORT',
+        'DB_DATABASE',
+        'DB_USERNAME',
+        'DB_PASSWORD',
+
+        // Mail
         'MAIL_ENABLED',
         'MAIL_HOST',
         'MAIL_PORT',
@@ -40,14 +48,23 @@ function load_mugts_mail_environment(): void
 
         [$key, $value] = explode('=', $line, 2);
         $key = trim($key);
+
         if (!in_array($key, $allowedKeys, true) || getenv($key) !== false) {
             continue;
         }
 
         $value = trim($value);
-        if (strlen($value) >= 2 && (($value[0] === '"' && $value[-1] === '"') || ($value[0] === "'" && $value[-1] === "'"))) {
+
+        if (
+            strlen($value) >= 2 &&
+            (
+                ($value[0] === '"' && $value[-1] === '"') ||
+                ($value[0] === "'" && $value[-1] === "'")
+            )
+        ) {
             $value = substr($value, 1, -1);
         }
+
         putenv($key . '=' . $value);
         $_ENV[$key] = $value;
     }
@@ -62,17 +79,33 @@ function mugts_mail_config(): array
 
     load_mugts_mail_environment();
 
-    $enabled = filter_var(getenv('MAIL_ENABLED') ?: 'false', FILTER_VALIDATE_BOOLEAN);
+    $enabled = filter_var(
+        getenv('MAIL_ENABLED') ?: 'false',
+        FILTER_VALIDATE_BOOLEAN
+    );
+
     $config = [
         'enabled' => $enabled,
         'host' => trim((string) (getenv('MAIL_HOST') ?: '')),
         'port' => (int) (getenv('MAIL_PORT') ?: 587),
         'username' => trim((string) (getenv('MAIL_USERNAME') ?: '')),
         'password' => (string) (getenv('MAIL_PASSWORD') ?: ''),
-        'encryption' => strtolower(trim((string) (getenv('MAIL_ENCRYPTION') ?: 'tls'))),
-        'from_address' => trim((string) (getenv('MAIL_FROM_ADDRESS') ?: 'noreply@maseno.ac.ke')),
-        'from_name' => trim((string) (getenv('MAIL_FROM_NAME') ?: 'Maseno Pathfinder')),
-        'app_url' => rtrim((string) (getenv('MUGTS_APP_URL') ?: 'http://localhost/maseno-pathfinder/frontend'), '/'),
+        'encryption' => strtolower(
+            trim((string) (getenv('MAIL_ENCRYPTION') ?: 'tls'))
+        ),
+        'from_address' => trim(
+            (string) (getenv('MAIL_FROM_ADDRESS') ?: 'noreply@maseno.ac.ke')
+        ),
+        'from_name' => trim(
+            (string) (getenv('MAIL_FROM_NAME') ?: 'Maseno Pathfinder')
+        ),
+        'app_url' => rtrim(
+            (string) (
+                getenv('MUGTS_APP_URL')
+                ?: 'http://localhost/maseno-pathfinder/frontend'
+            ),
+            '/'
+        ),
     ];
 
     return $config;
