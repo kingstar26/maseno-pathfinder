@@ -1,0 +1,224 @@
+﻿@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * MUGTS â€” Maseno University Online Graduate Tracer System
+ * Palette matches Maseno Student Portal styling.
+ */
+
+@theme inline {
+  --font-sans: "Poppins", "Segoe UI", Roboto, Arial, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --color-gold: var(--gold);
+  --color-navy: var(--navy);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-card: 0 1px 2px oklch(0 0 0 / 0.04), 0 4px 16px oklch(0 0 0 / 0.06);
+  --shadow-card-hover: 0 4px 8px oklch(0 0 0 / 0.06), 0 12px 32px oklch(0 0 0 / 0.1);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Maseno brand */
+  --navy: #0aa4dc; /* #0B3C88 */
+  --navy-deep: #031e29; /* #072B61 sidebar */
+  --gold: #f39a09; /* #F5B301 */
+
+  --background: oklch(0.975 0.004 250); /* #F5F7FA */
+  --foreground: oklch(0.22 0 0); /* #222222 */
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0 0);
+
+  --primary: var(--navy);
+  --primary-foreground: #ffffff;
+  --secondary: var(--gold);
+  --secondary-foreground: oklch(0.22 0 0);
+
+  --muted: oklch(0.96 0.005 250);
+  --muted-foreground: oklch(0.48 0.01 260);
+  --accent: oklch(0.94 0.02 82);
+  --accent-foreground: oklch(0.22 0 0);
+
+  --destructive: oklch(0.6 0.22 27); /* #DC3545 */
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.65 0.17 148); /* #28A745 */
+  --warning: oklch(0.82 0.16 82); /* #FFC107 */
+  --danger: oklch(0.6 0.22 27);
+  --info: oklch(0.65 0.11 210); /* #17A2B8 */
+
+  --border: oklch(0.9 0.008 260); /* #D9DDE3 */
+  --input: oklch(0.9 0.008 260);
+  --ring: var(--navy);
+
+  --sidebar: var(--navy);
+  --sidebar-foreground: oklch(0.97 0.01 260);
+  --sidebar-primary: var(--gold);
+  --sidebar-primary-foreground: oklch(0.22 0 0);
+  --sidebar-accent: #0798cd;
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: #0798cd;
+  --sidebar-ring: var(--gold);
+}
+
+.dark {
+  --background: #061a24;
+  --foreground: #f7fbfd;
+  --card: #0d2935;
+  --card-foreground: #f7fbfd;
+  --popover: #0d2935;
+  --popover-foreground: #f7fbfd;
+  --primary: var(--navy);
+  --primary-foreground: #ffffff;
+  --secondary: #173642;
+  --secondary-foreground: #f7fbfd;
+  --muted: #15333f;
+  --muted-foreground: #aec0ca;
+  --accent: #173642;
+  --accent-foreground: #f7fbfd;
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: var(--navy);
+  --sidebar: #062633;
+  --sidebar-foreground: oklch(0.97 0 0);
+  --sidebar-accent: #123946;
+  --sidebar-accent-foreground: #f7fbfd;
+  --sidebar-border: oklch(1 0 0 / 10%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html,
+  body {
+    font-family: var(--font-sans);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.01em;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    transition-duration: 160ms;
+  }
+}
+
+html[data-compact="true"] main {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+html[data-compact="true"] main .rounded-2xl {
+  border-radius: 0.9rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Responsive safeguards shared by every MUGTS page. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+@media (max-width: 639px) {
+  main {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .rounded-2xl {
+    border-radius: 0.9rem;
+  }
+
+  [role="dialog"] {
+    overscroll-behavior: contain;
+  }
+
+  /* Keep page-header actions reachable rather than forcing a horizontal row. */
+  main > div > .mb-6 > .w-full > button,
+  main > div > .mb-6 > .w-full > a {
+    flex: 1 1 auto;
+  }
+}

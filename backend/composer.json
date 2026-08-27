@@ -1,0 +1,8 @@
+{
+  "name": "maseno-pathfinder/backend",
+  "description": "Maseno Pathfinder backend dependencies",
+  "require": {
+    "php": ">=8.1",
+    "phpmailer/phpmailer": "^6.9"
+  }
+}

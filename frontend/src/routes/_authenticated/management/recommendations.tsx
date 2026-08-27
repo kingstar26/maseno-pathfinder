@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { ResourceTablePage } from "@/components/role-workspace/ResourceTablePage";
+export const Route = createFileRoute("/_authenticated/management/recommendations")({ component: () => <ResourceTablePage title="Recommendation Letters" subtitle="Review recommendation requests and their secure verification status." columns={["Graduate", "Purpose", "Requested", "Status", "QR Verification", "Actions"]} actions={["Approve request", "Reject request", "Generate letter", "Download letter", "View QR verification status"]} /> });

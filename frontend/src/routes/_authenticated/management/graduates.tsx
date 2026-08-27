@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { ResourceTablePage } from "@/components/role-workspace/ResourceTablePage";
+export const Route = createFileRoute("/_authenticated/management/graduates")({ component: () => <ResourceTablePage title="Graduates" subtitle="Monitor graduate records and outcomes without changing graduate data." columns={["Photo", "Admission Number", "Name", "Faculty", "Programme", "Graduation Year", "Employment Status", "Recommendation Status", "Actions"]} actions={["View profile", "View survey", "View recommendation status"]} /> });

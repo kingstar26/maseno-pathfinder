@@ -1,0 +1,22 @@
+# Frontend dependencies/build
+frontend/node_modules/
+frontend/dist/
+
+# Backend dependencies
+backend/vendor/
+
+# Backend secrets
+backend/.env
+
+# Uploaded/user-generated files
+backend/uploads/
+
+# Temporary development files
+scratch/
+
+# Local/editor/system files
+.vscode/
+.idea/
+*.log
+.DS_Store
+Thumbs.db

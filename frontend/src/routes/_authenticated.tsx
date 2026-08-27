@@ -1,0 +1,8 @@
+import { createFileRoute, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { useAuth } from "@/context/auth-context";
+import { dashboardPath } from "@/lib/dashboard";
+
+export const Route = createFileRoute("/_authenticated")({ ssr: false, component: AuthenticatedLayout });
+function AuthenticatedLayout() { const { user, isAuthenticated, hydrated } = useAuth(); const navigate = useNavigate(); const pathname = useRouterState({ select: (state) => state.location.pathname }); useEffect(() => { if (hydrated && !isAuthenticated) { navigate({ to: "/login", replace: true }); return; } if (!user) return; const ownDashboard = dashboardPath(user.role); const rolePrefix = user.role === "management" ? "/management/" : user.role === "administrator" ? "/administrator/" : null; if (rolePrefix ? !pathname.startsWith(rolePrefix) : pathname.startsWith("/management/") || pathname.startsWith("/administrator/")) navigate({ to: ownDashboard, replace: true }); }, [hydrated, isAuthenticated, navigate, pathname, user]); if (!hydrated) return <div className="flex min-h-screen items-center justify-center bg-background"><div className="h-8 w-8 animate-spin rounded-full border-2 border-primary/30 border-t-primary" /></div>; if (!isAuthenticated) return null; return <DashboardLayout><Outlet /></DashboardLayout>; }

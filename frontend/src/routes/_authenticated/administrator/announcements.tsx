@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { ResourceTablePage } from "@/components/role-workspace/ResourceTablePage";
+export const Route = createFileRoute("/_authenticated/administrator/announcements")({ component: () => <ResourceTablePage title="Announcements" subtitle="Create, edit, publish, and manage institutional announcements." columns={["Title", "Audience", "Status", "Published", "Actions"]} actions={["Create announcement", "Edit announcement", "Delete announcement", "Publish announcement"]} allowCreate /> });

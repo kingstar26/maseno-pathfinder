@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { ResourceTablePage } from "@/components/role-workspace/ResourceTablePage";
+export const Route = createFileRoute("/_authenticated/management/surveys")({ component: () => <ResourceTablePage title="Tracer Surveys" subtitle="Monitor tracer survey completion and review submitted responses." columns={["Graduate", "Survey", "Status", "Completion", "Submitted", "Actions"]} actions={["View survey responses", "Export survey report"]} exports /> });
