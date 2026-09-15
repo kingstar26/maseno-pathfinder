@@ -22,6 +22,7 @@ function load_mugts_mail_environment(): void
         'DB_DATABASE',
         'DB_USERNAME',
         'DB_PASSWORD',
+        'DB_SSL_CA_PATH',
 
         // Mail
         'MAIL_ENABLED',

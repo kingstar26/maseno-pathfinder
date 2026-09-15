@@ -1,0 +1,25 @@
+# Git and local editor files
+.git
+.gitignore
+.vscode
+.idea
+
+# Frontend is deployed separately
+frontend
+
+# Local backend secrets and generated dependencies
+backend/.env
+backend/.env.*
+!backend/.env.example
+backend/vendor
+backend/uploads
+
+# Local development and test files
+scratch
+backend/tests
+backend/debug.php
+backend/test.php
+
+# Existing local build artifacts and logs
+frontend/dist
+*.log

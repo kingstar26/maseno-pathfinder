@@ -21,14 +21,35 @@ function database_connection(): mysqli
     $database = getenv('DB_DATABASE') ?: 'maseno_graduate_tracer';
     $username = getenv('DB_USERNAME') ?: 'root';
     $password = getenv('DB_PASSWORD') ?: '';
+    $caPath = getenv('DB_SSL_CA_PATH');
 
-    $connection = new mysqli(
-        $host,
-        $username,
-        $password,
-        $database,
-        $port
-    );
+    if ($caPath !== false && $caPath !== '') {
+        if (!is_readable($caPath)) {
+            throw new RuntimeException('Database CA certificate is not readable.');
+        }
+
+        $connection = mysqli_init();
+        mysqli_ssl_set($connection, null, null, $caPath, null, null);
+        mysqli_options($connection, MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true);
+        mysqli_real_connect(
+            $connection,
+            $host,
+            $username,
+            $password,
+            $database,
+            $port,
+            null,
+            MYSQLI_CLIENT_SSL
+        );
+    } else {
+        $connection = new mysqli(
+            $host,
+            $username,
+            $password,
+            $database,
+            $port
+        );
+    }
 
     $connection->set_charset('utf8mb4');
 
