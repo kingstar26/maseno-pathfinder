@@ -36,4 +36,4 @@ RUN composer install \
 
 COPY backend/ ./
 
-CMD ["sh", "-c", "port=\"${PORT:-80}\"; sed -ri \"s/^Listen [0-9]+/Listen ${port}/\" /etc/apache2/ports.conf; sed -ri \"s/<VirtualHost \\*:[0-9]+>/<VirtualHost *:${port}>/\" /etc/apache2/sites-available/000-default.conf; exec apache2-foreground"]
+CMD ["sh", "-c", "port=\"${PORT:-80}\"; sed -ri \"s/^Listen [0-9]+/Listen ${port}/\" /etc/apache2/ports.conf; sed -ri \"s/<VirtualHost \\*:[0-9]+>/<VirtualHost *:${port}>/\" /etc/apache2/sites-available/000-default.conf; mkdir -p /run/mugts; cp /etc/secrets/ca.pem /run/mugts/ca.pem; chown www-data:www-data /run/mugts/ca.pem; chmod 0400 /run/mugts/ca.pem; export DB_SSL_CA_PATH=/run/mugts/ca.pem; exec apache2-foreground"]
