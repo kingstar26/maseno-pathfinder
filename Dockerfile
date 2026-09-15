@@ -13,6 +13,8 @@ RUN apt-get update \
     && a2enmod rewrite \
     && rm -rf /var/lib/apt/lists/*
 
+RUN usermod -a -G 1000 www-data
+
 # fileinfo, json, and openssl are built into the official PHP image.
 RUN php -m | grep -E '^(curl|fileinfo|json|mbstring|mysqli|openssl)$' >/dev/null
 
